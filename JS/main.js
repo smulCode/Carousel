@@ -4,8 +4,7 @@ const nextButton = document.querySelector(".carousel-button--right");
 const previousButton = document.querySelector(".carousel-button--left");
 const dotsNav = document.querySelector(".carousel-nav");
 const dots = Array.from(dotsNav.children);
-// const backgroundTransform = document.querySelector(".active-transition");
-
+// const fadeIn = document.querySelector(".fade-in")
 
 // console.log(slides);
 
@@ -33,13 +32,14 @@ const setSlidePosition = (slide, index) => {
 slides.forEach(setSlidePosition);
 
 const moveToSlide = (track, currentSlide, targetSlide) => {
-    track.style.transform = "translateX(-" + targetSlide.style.left + ")";
-    currentSlide.classList.remove("current-slide");
-    targetSlide.classList.add("current-slide");
-    
-  };
-  
+  track.style.transform = "translateX(-" + targetSlide.style.left + ")";
+  currentSlide.classList.remove("current-slide");
+  targetSlide.classList.add("current-slide");
 
+  //fade-in animation when moving to slide
+  currentSlide.classList.remove("fade-in");
+  targetSlide.classList.add("fade-in");
+};
 
 const updateDots = (currentDot, targetDot) => {
   currentDot.classList.remove("current-slide");
@@ -47,21 +47,17 @@ const updateDots = (currentDot, targetDot) => {
 };
 
 const hideShowArrows = (slides, previousButton, nextButton, targetIndex) => {
-
-    
   if (targetIndex === 0) {
-    previousButton.classList.add('is-hidden');  
-    nextButton.classList.remove('is-hidden'); 
-} else if (targetIndex === slides.length - 1){
-    previousButton.classList.remove('is-hidden');
-    nextButton.classList.add('is-hidden');
-}else {
-    previousButton.classList.remove('is-hidden');
-    nextButton.classList.remove('is-hidden');
-}
-
-
-}
+    previousButton.classList.add("is-hidden");
+    nextButton.classList.remove("is-hidden");
+  } else if (targetIndex === slides.length - 1) {
+    previousButton.classList.remove("is-hidden");
+    nextButton.classList.add("is-hidden");
+  } else {
+    previousButton.classList.remove("is-hidden");
+    nextButton.classList.remove("is-hidden");
+  }
+};
 
 //when i click left, move to the left;
 previousButton.addEventListener("click", (e) => {
@@ -69,7 +65,7 @@ previousButton.addEventListener("click", (e) => {
   const previousSlide = currentSlide.previousElementSibling;
   const currentDot = dotsNav.querySelector(".current-slide");
   const previousDot = currentDot.previousElementSibling;
-  const previousIndex = slides.findIndex(slide => slide === previousSlide) 
+  const previousIndex = slides.findIndex((slide) => slide === previousSlide);
 
   moveToSlide(track, currentSlide, previousSlide);
   updateDots(currentDot, previousDot);
@@ -82,7 +78,7 @@ nextButton.addEventListener("click", (e) => {
   const nextSlide = currentSlide.nextElementSibling;
   const currentDot = dotsNav.querySelector(".current-slide");
   const nextDot = currentDot.nextElementSibling;
-    const nextIndex = slides.findIndex(slide => slide === nextSlide) 
+  const nextIndex = slides.findIndex((slide) => slide === nextSlide);
 
   moveToSlide(track, currentSlide, nextSlide);
   updateDots(currentDot, nextDot);
@@ -101,12 +97,9 @@ dotsNav.addEventListener("click", (e) => {
   const targetIndex = dots.findIndex((dot) => dot === targetDot);
   const targetSlide = slides[targetIndex];
 
-
   moveToSlide(track, currentSlide, targetSlide);
   updateDots(currentDot, targetDot);
   hideShowArrows(slides, previousButton, nextButton, targetIndex);
- 
-
 });
 
 //options
