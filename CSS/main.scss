@@ -26,6 +26,8 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  // transition:all 0.5s ease-in-out;
+  animation: zoomIn 15s linear infinite alternate;
 }
 
 .carousel-track-container {
@@ -126,5 +128,16 @@ body {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@-webkit-keyframes zoomIn {
+  0% {
+    transform: scale(1);
+    transform-origin: left;
+  }
+  100% {
+    transform: scale(1.07);
+    transform-origin: left;
   }
 }
