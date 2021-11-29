@@ -61,7 +61,6 @@ body {
 }
 
 .carousel-nav {
-  background: plum;
   display: flex;
   justify-content: center;
   padding: 10px 0;
@@ -79,4 +78,17 @@ body {
 
 .carousel-indicator.current-slide {
   background: rgba(0, 0, 0, 0.75);
+}
+
+.is-hidden {
+  display: none;
+}
+
+.active-transition {
+  -webkit-clip-path: circle(150% at 0 50%);
+          clip-path: circle(150% at 0 50%);
+  transition: 2s;
+  transition-property: -webkit-clip-path;
+  transition-property: clip-path;
+  transition-property: clip-path, -webkit-clip-path;
 }/*# sourceMappingURL=main.css.map */
