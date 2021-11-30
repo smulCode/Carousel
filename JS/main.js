@@ -19,7 +19,7 @@ const lastDot = dots[dots.length - 1];
 // const slideWidth = slideSize.width;
 const slideWidth = slides[0].getBoundingClientRect().width;
 
-// console.log(slideWidth);
+//  console.log(slideWidth);
 
 //arrange the slides next to one another
 // slides[0].style.left = slideWidth * 0 +  'px';
@@ -37,24 +37,26 @@ const setSlidePosition = (slide, index) => {
 
 slides.forEach(setSlidePosition);
 
+const setCurrentSlide = (track, currentSlide, targetSlide) => {
+  currentSlide.classList.remove("current-slide");
+  targetSlide.classList.add("current-slide");
+  track.style.transform = "translateX(-" + targetSlide.style.left + ")";
+
+}
+
 const moveToSlide = (track, currentSlide, targetSlide) => {
-  if (targetSlide === null && currentSlide === lastSlide) {
+  if
+   (targetSlide === null && currentSlide === lastSlide) {
     targetSlide = firstSlide;
 
-    currentSlide.classList.remove("current-slide");
-    targetSlide.classList.add("current-slide");
-    track.style.transform = "translateX(-" + targetSlide.style.left + ")";
+    setCurrentSlide(track, currentSlide, targetSlide);   
   } else if (targetSlide === null && currentSlide === firstSlide) {
     targetSlide = lastSlide;
 
-    currentSlide.classList.remove("current-slide");
-    targetSlide.classList.add("current-slide");
-    track.style.transform = "translateX(-" + targetSlide.style.left + ")";
+    setCurrentSlide(track, currentSlide, targetSlide);
   } else {
-    track.style.transform = "translateX(-" + targetSlide.style.left + ")";
 
-    currentSlide.classList.remove("current-slide");
-    targetSlide.classList.add("current-slide");
+    setCurrentSlide(track, currentSlide, targetSlide);
   }
 
   //fade-in animation when moving to slide
@@ -62,20 +64,23 @@ const moveToSlide = (track, currentSlide, targetSlide) => {
   targetSlide.classList.add("fade-in");
 };
 
+const setClassOnDot = (currentDot, targetDot) => {
+  currentDot.classList.remove("current-slide");
+  targetDot.classList.add("current-slide");
+}
+
 const updateDots = (currentDot, targetDot) => {
   if (targetDot === null && currentDot === lastDot) {
     targetDot = firstDot;
 
-    currentDot.classList.remove("current-slide");
-    targetDot.classList.add("current-slide");
+    setClassOnDot(currentDot, targetDot);
   } else if (targetDot === null && currentDot === firstDot) {
     targetDot = lastDot;
 
-    currentDot.classList.remove("current-slide");
-    targetDot.classList.add("current-slide");
+    setClassOnDot(currentDot, targetDot);
   } else {
-    currentDot.classList.remove("current-slide");
-    targetDot.classList.add("current-slide");
+
+    setClassOnDot(currentDot, targetDot);
   }
 };
 // const hideShowArrows = (slides, previousButton, nextButton, targetIndex) => {
@@ -128,6 +133,7 @@ dotsNav.addEventListener("click", (e) => {
   const currentDot = dotsNav.querySelector(".current-slide");
   const targetIndex = dots.findIndex((dot) => dot === targetDot);
   const targetSlide = slides[targetIndex];
+ 
 
   moveToSlide(track, currentSlide, targetSlide);
   updateDots(currentDot, targetDot);
