@@ -109,7 +109,7 @@ previousButton.addEventListener("click", (e) => {
   //   hideShowArrows(slides, previousButton, nextButton, previousIndex);
 });
 
-//when i click right, move to the right;
+// when i click right, move to the right;
 nextButton.addEventListener("click", (e) => {
   const currentSlide = track.querySelector(".current-slide");
   const nextSlide = currentSlide.nextElementSibling;
