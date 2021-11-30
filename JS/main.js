@@ -5,8 +5,12 @@ const previousButton = document.querySelector(".carousel-button--left");
 const dotsNav = document.querySelector(".carousel-nav");
 const dots = Array.from(dotsNav.children);
 
+
 const firstSlide = slides[slides.length - slides.length];
 const lastSlide = slides[slides.length - 1];
+const firstDot = dots[dots.length - dots.length];
+const lastDot = dots[dots.length - 1];
+
 
 // console.log(firstSlide);
 // console.log(lastSlide);
@@ -31,7 +35,6 @@ const slideWidth = slides[0].getBoundingClientRect().width;
 //arrange the slides next to one another
 const setSlidePosition = (slide, index) => {
   slide.style.left = slideWidth * index + "px";
- 
 };
 
 slides.forEach(setSlidePosition);
@@ -39,19 +42,17 @@ slides.forEach(setSlidePosition);
 const moveToSlide = (track, currentSlide, targetSlide) => {
   if (targetSlide === null && currentSlide === lastSlide) {
     targetSlide = firstSlide;
+
     currentSlide.classList.remove("current-slide");
     targetSlide.classList.add("current-slide");
     track.style.transform = "translateX(-" + targetSlide.style.left + ")";
-
   } else if (targetSlide === null && currentSlide === firstSlide) {
-
     targetSlide = lastSlide;
+
     currentSlide.classList.remove("current-slide");
     targetSlide.classList.add("current-slide");
     track.style.transform = "translateX(-" + targetSlide.style.left + ")";
-  } 
-  
-  else {
+  } else {
     track.style.transform = "translateX(-" + targetSlide.style.left + ")";
 
     currentSlide.classList.remove("current-slide");
@@ -64,11 +65,21 @@ const moveToSlide = (track, currentSlide, targetSlide) => {
 };
 
 const updateDots = (currentDot, targetDot) => {
-  currentDot.classList.remove("current-slide");
-  targetDot.classList.add("current-slide");
-  
-};
+  if (targetDot === null && currentDot === lastDot) {
+    targetDot = firstDot;
 
+    currentDot.classList.remove("current-slide");
+    targetDot.classList.add("current-slide");
+  } else if (targetDot === null && currentDot === firstDot) {
+    targetDot = lastDot;
+
+    currentDot.classList.remove("current-slide");
+    targetDot.classList.add("current-slide");
+  } else {
+    currentDot.classList.remove("current-slide");
+    targetDot.classList.add("current-slide");
+  }
+};
 // const hideShowArrows = (slides, previousButton, nextButton, targetIndex) => {
 //   if (targetIndex === 0) {
 //     previousButton.classList.add("is-hidden");
@@ -88,10 +99,10 @@ previousButton.addEventListener("click", (e) => {
   const previousSlide = currentSlide.previousElementSibling;
   const currentDot = dotsNav.querySelector(".current-slide");
   const previousDot = currentDot.previousElementSibling;
-  const previousIndex = slides.findIndex((slide) => slide === previousSlide);
+  // const previousIndex = slides.findIndex((slide) => slide === previousSlide);
 
   moveToSlide(track, currentSlide, previousSlide);
-    updateDots(currentDot, previousDot);
+  updateDots(currentDot, previousDot);
   //   hideShowArrows(slides, previousButton, nextButton, previousIndex);
 });
 
@@ -101,10 +112,10 @@ nextButton.addEventListener("click", (e) => {
   const nextSlide = currentSlide.nextElementSibling;
   const currentDot = dotsNav.querySelector(".current-slide");
   const nextDot = currentDot.nextElementSibling;
-  const nextIndex = slides.findIndex((slide) => slide === nextSlide);
+  // const nextIndex = slides.findIndex((slide) => slide === nextSlide);
 
   moveToSlide(track, currentSlide, nextSlide);
-    updateDots(currentDot, nextDot);
+  updateDots(currentDot, nextDot);
   //   hideShowArrows(slides, previousButton, nextButton, nextIndex);
 });
 
@@ -121,7 +132,7 @@ dotsNav.addEventListener("click", (e) => {
   const targetSlide = slides[targetIndex];
 
   moveToSlide(track, currentSlide, targetSlide);
-    updateDots(currentDot, targetDot);
+  updateDots(currentDot, targetDot);
   //   hideShowArrows(slides, previousButton, nextButton, targetIndex);
 });
 
@@ -131,9 +142,12 @@ dotsNav.addEventListener("click", (e) => {
 //when i click right, move to the right;
 //when I click the nav indicator ,move to that slide
 
+// /done
 //extra options
 //when i click left and I'm on the first slide, move to the last slide
 //when i click right and I'm on the last slide, move to the last slide
+
+// done
 
 //custom options
 //when i click left ,move slide behind other slide on the left side
