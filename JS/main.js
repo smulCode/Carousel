@@ -5,12 +5,10 @@ const previousButton = document.querySelector(".carousel-button--left");
 const dotsNav = document.querySelector(".carousel-nav");
 const dots = Array.from(dotsNav.children);
 
-
 const firstSlide = slides[slides.length - slides.length];
 const lastSlide = slides[slides.length - 1];
 const firstDot = dots[dots.length - dots.length];
 const lastDot = dots[dots.length - 1];
-
 
 // console.log(firstSlide);
 // console.log(lastSlide);
