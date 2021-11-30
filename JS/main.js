@@ -157,3 +157,5 @@ dotsNav.addEventListener("click", (e) => {
 //when i click left ,move slide behind other slide on the left side
 //when i click right ,move slide behind other slide on the right side
 //Expand buttons to make it touch friendly
+
+// Work in progress
