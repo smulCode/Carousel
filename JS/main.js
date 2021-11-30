@@ -8,12 +8,12 @@ const dots = Array.from(dotsNav.children);
 const firstSlide = slides[slides.length - slides.length];
 const lastSlide = slides[slides.length - 1];
 
-console.log(firstSlide);
-console.log(lastSlide);
+// console.log(firstSlide);
+// console.log(lastSlide);
 //  console.log(slides);
 
 // const slideSize = slides[0].getBoundingClientRect();
-// console.log(slideSize);
+//  console.log(slideSize);
 // const slideWidth = slideSize.width;
 const slideWidth = slides[0].getBoundingClientRect().width;
 
@@ -31,27 +31,27 @@ const slideWidth = slides[0].getBoundingClientRect().width;
 //arrange the slides next to one another
 const setSlidePosition = (slide, index) => {
   slide.style.left = slideWidth * index + "px";
+ 
 };
 
 slides.forEach(setSlidePosition);
 
 const moveToSlide = (track, currentSlide, targetSlide) => {
-  if (targetSlide === lastSlide) {
-    console.log(lastSlide);
-    console.log(targetSlide);
+  if (targetSlide === null && currentSlide === lastSlide) {
     targetSlide = firstSlide;
-    console.log(targetSlide);
     currentSlide.classList.remove("current-slide");
     targetSlide.classList.add("current-slide");
     track.style.transform = "translateX(-" + targetSlide.style.left + ")";
-  } else if (targetSlide === null) {
+
+  } else if (targetSlide === null && currentSlide === firstSlide) {
+
     targetSlide = lastSlide;
-    console.log(targetSlide);
-    console.log(currentSlide);
     currentSlide.classList.remove("current-slide");
     targetSlide.classList.add("current-slide");
     track.style.transform = "translateX(-" + targetSlide.style.left + ")";
-  } else {
+  } 
+  
+  else {
     track.style.transform = "translateX(-" + targetSlide.style.left + ")";
 
     currentSlide.classList.remove("current-slide");
@@ -63,10 +63,11 @@ const moveToSlide = (track, currentSlide, targetSlide) => {
   targetSlide.classList.add("fade-in");
 };
 
-// const updateDots = (currentDot, targetDot) => {
-//   currentDot.classList.remove("current-slide");
-//   targetDot.classList.add("current-slide");
-// };
+const updateDots = (currentDot, targetDot) => {
+  currentDot.classList.remove("current-slide");
+  targetDot.classList.add("current-slide");
+  
+};
 
 // const hideShowArrows = (slides, previousButton, nextButton, targetIndex) => {
 //   if (targetIndex === 0) {
@@ -90,7 +91,7 @@ previousButton.addEventListener("click", (e) => {
   const previousIndex = slides.findIndex((slide) => slide === previousSlide);
 
   moveToSlide(track, currentSlide, previousSlide);
-  //   updateDots(currentDot, previousDot);
+    updateDots(currentDot, previousDot);
   //   hideShowArrows(slides, previousButton, nextButton, previousIndex);
 });
 
@@ -103,7 +104,7 @@ nextButton.addEventListener("click", (e) => {
   const nextIndex = slides.findIndex((slide) => slide === nextSlide);
 
   moveToSlide(track, currentSlide, nextSlide);
-  //   updateDots(currentDot, nextDot);
+    updateDots(currentDot, nextDot);
   //   hideShowArrows(slides, previousButton, nextButton, nextIndex);
 });
 
@@ -120,7 +121,7 @@ dotsNav.addEventListener("click", (e) => {
   const targetSlide = slides[targetIndex];
 
   moveToSlide(track, currentSlide, targetSlide);
-  //   updateDots(currentDot, targetDot);
+    updateDots(currentDot, targetDot);
   //   hideShowArrows(slides, previousButton, nextButton, targetIndex);
 });
 
