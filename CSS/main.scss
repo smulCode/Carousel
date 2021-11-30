@@ -74,7 +74,7 @@ body {
   position: relative;
   height: 100%;
   
-  transition: transform 250ms linear;
+  transition: transform 10ms linear;
 }
 
 .carousel-slide {
@@ -125,11 +125,8 @@ body {
   display: flex;
   justify-content: center;
   padding: 10px 0;
-  margin-top: -3rem;
-  position: absolute;
-  z-index: 30;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 3rem;
+ 
 }
 
 .carousel-indicator {
@@ -180,6 +177,18 @@ body {
 
   
   
+  }
+
+  .carousel-nav {
+    //  background:plum;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    margin-top: -3rem;
+    position: absolute;
+    z-index: 30;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
 
